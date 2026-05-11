@@ -19,19 +19,13 @@ function dismissConsentGate(type) {
   document.body.style.overflow = '';
 }
 
-/* Einwilligung widerrufen und Gate erneut zeigen (Footer-Link) */
+/* Cookie-Banner erneut öffnen (Footer-Link) */
 function reopenConsentGate() {
-  localStorage.removeItem('cookieConsent');
-  localStorage.removeItem('cookieConsentDate');
   showConsentGate();
 }
 
-/* Beim Laden: zeigen falls noch keine Einwilligung */
-if (!localStorage.getItem('cookieConsent')) {
-  showConsentGate();
-} else {
-  consentGate.classList.add('hidden');
-}
+/* Beim Laden: immer anzeigen, unabhängig von vorheriger Einwilligung */
+showConsentGate();
 
 consentAcceptBtn.addEventListener('click',    () => dismissConsentGate('all'));
 consentNecessaryBtn.addEventListener('click', () => dismissConsentGate('necessary'));

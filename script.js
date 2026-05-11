@@ -129,10 +129,11 @@ function closeMenu() {
 }
 
 /* ═══════════════════════════════════════════
-   STICKY HEADER
+   STICKY HEADER + MENU-CLOSE ON SCROLL
 ═══════════════════════════════════════════ */
 window.addEventListener('scroll', () => {
   document.getElementById('mainHeader').classList.toggle('scrolled', window.scrollY > 40);
+  if (navLinks.classList.contains('open')) closeMenu();
 }, { passive: true });
 
 /* ═══════════════════════════════════════════

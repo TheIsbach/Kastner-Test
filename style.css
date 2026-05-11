@@ -1021,12 +1021,63 @@ p  { color: var(--gray-light); line-height: 1.7; }
   .stats-bar { flex-direction: column; gap: 1.5rem; }
   .stat-divider { width: 60px; height: 1px; }
   .services-grid { grid-template-columns: 1fr; }
+  .values-grid { grid-template-columns: 1fr; }
   .cert-grid { grid-template-columns: 1fr; }
   .ref-grid { grid-template-columns: 1fr; }
   .form-row { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; }
   .footer-bottom-inner { flex-direction: column; text-align: center; }
-  .hero-content { margin-left: 0; }
+  .footer-legal { flex-wrap: wrap; justify-content: center; gap: 1rem; }
+  .hero-content { margin-left: 0; padding-top: 5rem; }
   .cookie-inner { flex-direction: column; }
+  .cookie-actions { width: 100%; }
+  .cookie-actions .btn-outline,
+  .cookie-actions .btn-primary { flex: 1; justify-content: center; text-align: center; }
   .benefits-grid { grid-template-columns: 1fr; }
+
+  /* Abschnitte auf Mobile weniger Außenabstand */
+  .services-teaser,
+  .why-us,
+  .cta-banner { padding: 3.5rem 0; }
+  .content-section { padding: 2.5rem 0 3rem; }
+
+  /* Leistungen-Hero-Sektion */
+  .leistung-hero-section { padding: 4rem 2rem 2.5rem; }
+
+  /* Modal auf kleinen Screens */
+  .modal-box h2 { padding: 1.25rem 1.25rem 0; font-size: 1.3rem; }
+  .modal-scroll { padding: 1rem 1.25rem; }
+  .modal-footer { padding: 1rem 1.25rem; }
+
+  /* Tab-Navigation scrollbar */
+  .tab-nav { top: 60px; }
+}
+
+@media (max-width: 480px) {
+  h1 { font-size: clamp(1.8rem, 8vw, 2.6rem); }
+  h2 { font-size: clamp(1.4rem, 6vw, 1.9rem); }
+
+  .container { padding: 0 1rem; }
+  .hero-content { padding: 4.5rem 1rem 3rem; }
+  .hero-sub { font-size: 0.95rem; }
+  .hero-actions { flex-direction: column; }
+  .hero-actions .btn-primary,
+  .hero-actions .btn-ghost { width: 100%; justify-content: center; text-align: center; }
+
+  .cookie-banner { padding: 1rem; }
+  .privacy-banner { padding: 0.75rem 1rem; }
+
+  .section-header { margin-bottom: 2rem; }
+  .services-teaser,
+  .why-us,
+  .cta-banner { padding: 2.5rem 0; }
+  .content-section { padding: 2rem 0 2.5rem; }
+
+  .modal-box { border-radius: var(--radius); }
+  .modal-box h2 { font-size: 1.15rem; padding: 1rem 1rem 0; }
+  .modal-scroll { padding: 0.75rem 1rem; }
+  .modal-footer { padding: 0.75rem 1rem; }
+
+  .tab-btn { padding: 0.9rem 1rem; font-size: 0.8rem; }
+  .footer-legal { flex-direction: column; align-items: center; gap: 0.75rem; }
 }

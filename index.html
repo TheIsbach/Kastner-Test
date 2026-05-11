@@ -10,34 +10,61 @@
 <body>
 
   <!-- ═══════════════════════════════════════════════
-       CONSENT GATE (blocking first-visit overlay)
+       CONSENT GATE – zwei getrennte Banner:
+       1) Datenschutzerklärung-Banner
+       2) Cookie-Banner
   ═══════════════════════════════════════════════ -->
   <div id="consentGate" class="consent-gate hidden" role="dialog" aria-modal="true" aria-labelledby="consentTitle">
     <div class="consent-gate-box">
+
+      <!-- Logo -->
       <div class="consent-gate-logo">
         <span class="logo-mark">K</span>
         <span class="logo-text">Kastner <em>Lackierungen</em></span>
       </div>
-      <h2 id="consentTitle">Willkommen auf unserer Website</h2>
-      <p>Bevor Sie fortfahren, bitten wir Sie, unsere Datenschutz- und Cookie-Einstellungen zu bestätigen. Wir respektieren Ihre Privatsphäre.</p>
-      <div class="consent-gate-details">
-        <div class="consent-item">
-          <strong>✓ Technisch notwendige Cookies</strong>
-          <span>Immer aktiv – unverzichtbar für den Betrieb der Website (Sitzung, Formulare, Einstellungen)</span>
+
+      <!-- ── BANNER 1: Datenschutzerklärung ── -->
+      <div class="consent-block privacy-block">
+        <div class="consent-block-header">
+          <div class="consent-block-icon">🔒</div>
+          <div>
+            <h3 id="consentTitle">Datenschutzerklärung</h3>
+            <p>Ihre Daten werden gemäß DSGVO &amp; BDSG nur zur Bearbeitung Ihrer Anfragen und zum Betrieb dieser Website verarbeitet. Es erfolgt keine Weitergabe an Dritte ohne Ihre ausdrückliche Einwilligung.</p>
+          </div>
         </div>
-        <div class="consent-item consent-item-optional">
-          <strong>◎ Analyse &amp; Statistik</strong>
-          <span>Helfen uns, das Nutzungsverhalten zu verstehen und die Website zu verbessern (nur mit Ihrer Zustimmung)</span>
+        <button class="link-btn consent-privacy-link" onclick="openPrivacyFromGate()">
+          Datenschutzerklärung vollständig lesen →
+        </button>
+      </div>
+
+      <div class="consent-separator"></div>
+
+      <!-- ── BANNER 2: Cookie-Einstellungen ── -->
+      <div class="consent-block cookie-block">
+        <div class="consent-block-header">
+          <div class="consent-block-icon">🍪</div>
+          <div>
+            <h3>Cookie-Einstellungen</h3>
+            <p>Wir setzen Cookies ein. Technisch notwendige Cookies sind für den Betrieb der Website erforderlich. Analyse-Cookies helfen uns, das Nutzungsverhalten zu verstehen – diese werden nur mit Ihrer Zustimmung aktiviert.</p>
+          </div>
         </div>
+        <div class="consent-cookie-details">
+          <div class="consent-cookie-row">
+            <span class="consent-cookie-badge always">Immer aktiv</span>
+            <span>Technisch notwendige Cookies (Session, Formulare)</span>
+          </div>
+          <div class="consent-cookie-row">
+            <span class="consent-cookie-badge optional">Optional</span>
+            <span>Analyse- &amp; Statistik-Cookies (nur mit Ihrer Zustimmung)</span>
+          </div>
+        </div>
+        <div class="consent-gate-actions">
+          <button class="btn-outline" id="consentNecessary">Nur notwendige akzeptieren</button>
+          <button class="btn-primary" id="consentAccept">Alle akzeptieren</button>
+        </div>
+        <p class="consent-gate-legal">Mit einem Klick bestätigen Sie, dass Sie die Datenschutzerklärung gelesen haben und stimmen der Verarbeitung gemäß Ihrer Auswahl zu. Einwilligung jederzeit widerrufbar über „Cookie-Einstellungen" im Footer.</p>
       </div>
-      <p class="consent-gate-legal">Mit „Alle akzeptieren" stimmen Sie der Nutzung aller Cookies gemäß unserer
-        <button class="link-btn" onclick="openPrivacyFromGate()">Datenschutzerklärung</button> zu.
-        Sie können Ihre Einwilligung jederzeit über „Cookie-Einstellungen" im Footer widerrufen.
-      </p>
-      <div class="consent-gate-actions">
-        <button class="btn-outline" id="consentNecessary">Nur notwendige</button>
-        <button class="btn-primary" id="consentAccept">Alle akzeptieren</button>
-      </div>
+
     </div>
   </div>
 

@@ -1,5 +1,8 @@
 /* ═══════════════════════════════════════════
-   CONSENT GATE (blocking first-visit overlay)
+   CONSENT GATE – Datenschutz + Cookie Banner
+   Erscheint bei jedem Erstbesuch (localStorage
+   leer). Zum Testen: DevTools → Application →
+   Local Storage → "cookieConsent" löschen.
 ═══════════════════════════════════════════ */
 const consentGate         = document.getElementById('consentGate');
 const consentAcceptBtn    = document.getElementById('consentAccept');
@@ -12,6 +15,7 @@ function dismissConsentGate(type) {
   document.body.style.overflow = '';
 }
 
+/* Banner beim Erstbesuch anzeigen */
 if (!localStorage.getItem('cookieConsent')) {
   consentGate.classList.remove('hidden');
   document.body.style.overflow = 'hidden';
@@ -22,6 +26,7 @@ if (!localStorage.getItem('cookieConsent')) {
 consentAcceptBtn.addEventListener('click',    () => dismissConsentGate('all'));
 consentNecessaryBtn.addEventListener('click', () => dismissConsentGate('necessary'));
 
+/* Datenschutz aus dem Consent-Gate heraus öffnen */
 function openPrivacyFromGate() {
   openPrivacy();
 }

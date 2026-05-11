@@ -1,46 +1,34 @@
 /* ═══════════════════════════════════════════
-   CONSENT GATE – Cookie + Datenschutz Banner
-   Erscheint beim Erstbesuch und nach Widerruf.
-   Einwilligung wird in localStorage gespeichert.
+   DATENSCHUTZ-BANNER (oben, nur Erstbesuch)
+   Fährt von oben ins Bild; Datenschutzmodal
+   kann geöffnet werden ohne Banner zu schließen.
 ═══════════════════════════════════════════ */
-const consentGate         = document.getElementById('consentGate');
-const consentAcceptBtn    = document.getElementById('consentAccept');
-const consentNecessaryBtn = document.getElementById('consentNecessary');
+const privacyBanner = document.getElementById('privacyBanner');
 
-function showConsentGate() {
-  consentGate.classList.remove('hidden');
-  document.body.style.overflow = 'hidden';
+function dismissPrivacyBanner() {
+  privacyBanner.classList.remove('slide-in');
+  privacyBanner.classList.add('slide-out');
+  localStorage.setItem('privacyBannerSeen', 'true');
+  setTimeout(() => privacyBanner.classList.add('hidden'), 420);
 }
 
-function dismissConsentGate(type) {
-  localStorage.setItem('cookieConsent', type);
-  localStorage.setItem('cookieConsentDate', new Date().toISOString());
-  consentGate.classList.add('hidden');
-  document.body.style.overflow = '';
+if (!localStorage.getItem('privacyBannerSeen')) {
+  privacyBanner.classList.remove('hidden');
+  requestAnimationFrame(() => privacyBanner.classList.add('slide-in'));
 }
-
-/* Cookie-Banner erneut öffnen (Footer-Link) */
-function reopenConsentGate() {
-  showConsentGate();
-}
-
-/* Beim Laden: immer anzeigen, unabhängig von vorheriger Einwilligung */
-showConsentGate();
-
-consentAcceptBtn.addEventListener('click',    () => dismissConsentGate('all'));
-consentNecessaryBtn.addEventListener('click', () => dismissConsentGate('necessary'));
-
-/* Datenschutz aus dem Consent-Gate öffnen */
-function openPrivacyFromGate() { openPrivacy(); }
 
 /* ═══════════════════════════════════════════
-   COOKIE BANNER (Footer-Widerruf)
+   COOKIE BANNER (unten, bei jedem Besuch)
 ═══════════════════════════════════════════ */
 const cookieBanner    = document.getElementById('cookieBanner');
 const cookieAccept    = document.getElementById('cookieAccept');
 const cookieNecessary = document.getElementById('cookieNecessary');
 
-cookieBanner.classList.add('hidden');
+cookieBanner.classList.remove('hidden');
+
+function reopenConsentGate() {
+  cookieBanner.classList.remove('hidden');
+}
 
 cookieAccept.addEventListener('click', () => {
   localStorage.setItem('cookieConsent', 'all');

@@ -10,9 +10,41 @@
 <body>
 
   <!-- ═══════════════════════════════════════════════
-       COOKIE BANNER
+       CONSENT GATE (blocking first-visit overlay)
   ═══════════════════════════════════════════════ -->
-  <div id="cookieBanner" class="cookie-banner" aria-live="polite">
+  <div id="consentGate" class="consent-gate hidden" role="dialog" aria-modal="true" aria-labelledby="consentTitle">
+    <div class="consent-gate-box">
+      <div class="consent-gate-logo">
+        <span class="logo-mark">K</span>
+        <span class="logo-text">Kastner <em>Lackierungen</em></span>
+      </div>
+      <h2 id="consentTitle">Willkommen auf unserer Website</h2>
+      <p>Bevor Sie fortfahren, bitten wir Sie, unsere Datenschutz- und Cookie-Einstellungen zu bestätigen. Wir respektieren Ihre Privatsphäre.</p>
+      <div class="consent-gate-details">
+        <div class="consent-item">
+          <strong>✓ Technisch notwendige Cookies</strong>
+          <span>Immer aktiv – unverzichtbar für den Betrieb der Website (Sitzung, Formulare, Einstellungen)</span>
+        </div>
+        <div class="consent-item consent-item-optional">
+          <strong>◎ Analyse &amp; Statistik</strong>
+          <span>Helfen uns, das Nutzungsverhalten zu verstehen und die Website zu verbessern (nur mit Ihrer Zustimmung)</span>
+        </div>
+      </div>
+      <p class="consent-gate-legal">Mit „Alle akzeptieren" stimmen Sie der Nutzung aller Cookies gemäß unserer
+        <button class="link-btn" onclick="openPrivacyFromGate()">Datenschutzerklärung</button> zu.
+        Sie können Ihre Einwilligung jederzeit über „Cookie-Einstellungen" im Footer widerrufen.
+      </p>
+      <div class="consent-gate-actions">
+        <button class="btn-outline" id="consentNecessary">Nur notwendige</button>
+        <button class="btn-primary" id="consentAccept">Alle akzeptieren</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
+       COOKIE BANNER (footer re-open)
+  ═══════════════════════════════════════════════ -->
+  <div id="cookieBanner" class="cookie-banner hidden" aria-live="polite">
     <div class="cookie-inner">
       <div class="cookie-text">
         <h3>Cookies & Datenschutz</h3>
@@ -21,6 +53,58 @@
       <div class="cookie-actions">
         <button class="btn-outline" id="cookieNecessary">Nur notwendige</button>
         <button class="btn-primary" id="cookieAccept">Alle akzeptieren</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
+       IMPRESSUM MODAL
+  ═══════════════════════════════════════════════ -->
+  <div id="impressumModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="impressumTitle">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeImpressum()" aria-label="Schließen">&times;</button>
+      <h2 id="impressumTitle">Impressum</h2>
+      <div class="modal-scroll">
+        <h3>Angaben gemäß § 5 TMG</h3>
+        <p>Kastner Lackierungen GmbH<br>Musterstraße 12<br>80333 München<br>Deutschland</p>
+
+        <h3>Vertreten durch</h3>
+        <p>Andreas Kastner (Geschäftsführer)</p>
+
+        <h3>Registereintrag</h3>
+        <p>Eingetragen im Handelsregister<br>Registergericht: Amtsgericht München<br>Registernummer: HRB 123456</p>
+
+        <h3>Umsatzsteuer-ID</h3>
+        <p>Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:<br>DE 123 456 789</p>
+
+        <h3>Kontakt</h3>
+        <p>Telefon: <a href="tel:+4989123456789" class="link-btn">+49 89 123 456 789</a><br>
+        E-Mail: <a href="mailto:info@kastner-lackierungen.de" class="link-btn">info@kastner-lackierungen.de</a></p>
+
+        <h3>Berufsbezeichnung und berufsrechtliche Regelungen</h3>
+        <p>Berufsbezeichnung: Fahrzeuglackierermeister (verliehen in der Bundesrepublik Deutschland)<br>
+        Zuständige Kammer: Handwerkskammer München und Oberbayern<br>
+        Berufsrechtliche Regelungen: Handwerksordnung (HwO)</p>
+
+        <h3>Verantwortlicher gemäß § 18 Abs. 2 MStV</h3>
+        <p>Andreas Kastner<br>Musterstraße 12, 80333 München</p>
+
+        <h3>Haftung für Inhalte</h3>
+        <p>Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt.</p>
+
+        <h3>Haftung für Links</h3>
+        <p>Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.</p>
+
+        <h3>Urheberrecht</h3>
+        <p>Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet.</p>
+
+        <h3>Online-Streitbeilegung</h3>
+        <p>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:<br>
+        <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener noreferrer" class="link-btn">https://ec.europa.eu/consumers/odr</a><br><br>
+        Wir sind nicht verpflichtet und nicht bereit, an einem Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-primary" onclick="closeImpressum()">Schließen</button>
       </div>
     </div>
   </div>
@@ -260,7 +344,7 @@
         <div class="two-col">
           <div class="col-text">
             <h2>Unsere Geschichte</h2>
-            <p>Kastner Lackierungen wurde 1993 von Hans Kastner gegründet und hat sich seitdem zu einem der führenden Lackierunternehmen in der Region entwickelt. Was als kleiner Handwerksbetrieb begann, ist heute ein modernes Unternehmen mit über 20 qualifizierten Mitarbeitern.</p>
+            <p>Kastner Lackierungen wurde 1993 von Andreas Kastner gegründet und hat sich seitdem zu einem der führenden Lackierunternehmen in der Region entwickelt. Was als kleiner Handwerksbetrieb begann, ist heute ein modernes Unternehmen mit über 20 qualifizierten Mitarbeitern.</p>
             <p>Wir verbinden traditionelles Handwerk mit modernster Technologie. Unsere Lackierkabinen sind auf dem neuesten Stand der Technik, und unsere Mitarbeiter werden regelmäßig weitergebildet, um die höchsten Qualitätsstandards zu gewährleisten.</p>
             <p>Als zertifizierter Partnerbetrieb führender Automobilhersteller sind wir in der Lage, auch komplexeste Lackierarbeiten fachgerecht und schnell durchzuführen – zum Serienfarbton und mit Original-Lackiermaterialien.</p>
           </div>
@@ -303,10 +387,10 @@
           <div class="team-card">
             <div class="team-photo tp1"></div>
             <div class="team-info">
-              <h3>Hans Kastner</h3>
+              <h3>Andreas Kastner</h3>
               <span class="team-role">Geschäftsführer &amp; Inhaber</span>
               <p>30+ Jahre Erfahrung in der Fahrzeuglackierung. Ausgebildeter Fahrzeuglackierermeister und zertifizierter Gutachter.</p>
-              <a href="mailto:h.kastner@kastner-lackierungen.de" class="team-contact">h.kastner@kastner-lackierungen.de</a>
+              <a href="mailto:a.kastner@kastner-lackierungen.de" class="team-contact">a.kastner@kastner-lackierungen.de</a>
             </div>
           </div>
           <div class="team-card">
@@ -549,42 +633,42 @@
         <div class="ref-card" data-cat="lack">
           <div class="ref-img ref1"></div>
           <div class="ref-info">
-            <h3>BMW M4 – Komplett-Neulackierung</h3>
+            <h3>BMW 3er – Komplett-Neulackierung</h3>
             <span class="ref-tag">Fahrzeuglackierung</span>
           </div>
         </div>
-        <div class="ref-card" data-cat="sonder">
+        <div class="ref-card" data-cat="lack">
           <div class="ref-img ref2"></div>
           <div class="ref-info">
-            <h3>Porsche 911 – Candy Blau</h3>
-            <span class="ref-tag">Sonderlackierung</span>
+            <h3>VW Golf 8 – Farbwechsel Pearlweiß</h3>
+            <span class="ref-tag">Fahrzeuglackierung</span>
           </div>
         </div>
         <div class="ref-card" data-cat="unfall">
           <div class="ref-img ref3"></div>
           <div class="ref-info">
-            <h3>Mercedes C-Klasse – Unfallinstandsetzung</h3>
+            <h3>VW Passat – Unfallinstandsetzung</h3>
             <span class="ref-tag">Unfall</span>
           </div>
         </div>
         <div class="ref-card" data-cat="smart">
           <div class="ref-img ref4"></div>
           <div class="ref-info">
-            <h3>Audi A5 – Dellenreparatur</h3>
+            <h3>Opel Astra – Kratzerreparatur</h3>
             <span class="ref-tag">Smart Repair</span>
           </div>
         </div>
         <div class="ref-card" data-cat="sonder">
           <div class="ref-img ref5"></div>
           <div class="ref-info">
-            <h3>Mustang GT – Matte Black Custom</h3>
+            <h3>Porsche 911 – Candy Blau Sonderlackierung</h3>
             <span class="ref-tag">Sonderlackierung</span>
           </div>
         </div>
         <div class="ref-card" data-cat="lack">
           <div class="ref-img ref6"></div>
           <div class="ref-info">
-            <h3>VW Golf 8 – Farbwechsel Pearlweiß</h3>
+            <h3>Ford Focus – Teillackierung Stoßstange</h3>
             <span class="ref-tag">Fahrzeuglackierung</span>
           </div>
         </div>
@@ -859,8 +943,8 @@
         <span>© 2026 Kastner Lackierungen GmbH. Alle Rechte vorbehalten.</span>
         <div class="footer-legal">
           <a href="#" onclick="openPrivacy()">Datenschutzerklärung</a>
-          <a href="#">Impressum</a>
-          <a href="#" onclick="document.getElementById('cookieBanner').classList.remove('hidden')">Cookie-Einstellungen</a>
+          <a href="#" onclick="openImpressum(); return false;">Impressum</a>
+          <a href="#" onclick="document.getElementById('cookieBanner').classList.toggle('hidden'); return false;">Cookie-Einstellungen</a>
         </div>
       </div>
     </div>

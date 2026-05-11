@@ -286,7 +286,7 @@ p  { color: var(--gray-light); line-height: 1.7; }
   transition: opacity 0.2s, transform 0.2s;
   box-shadow: var(--shadow);
 }
-.has-dropdown:hover .dropdown { opacity: 1; pointer-events: all; transform: translateY(0); }
+.has-dropdown.dropdown-open .dropdown { opacity: 1; pointer-events: all; transform: translateY(0); }
 .dropdown li a {
   display: block;
   padding: 0.6rem 1rem;
@@ -710,12 +710,33 @@ p  { color: var(--gray-light); line-height: 1.7; }
 .ref-card.filtered-out { display: none; }
 
 .ref-img { aspect-ratio: 4/3; }
-.ref1 { background: url('https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=600&q=80') center/cover; }
-.ref2 { background: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&q=80') center/cover; }
-.ref3 { background: url('https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=600&q=80') center/cover; }
-.ref4 { background: url('https://images.unsplash.com/photo-1549399542-7e3f8b79c341?w=600&q=80') center/cover; }
-.ref5 { background: url('https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=600&q=80') center/cover; }
-.ref6 { background: url('https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=600&q=80') center/cover; }
+/* BMW 3er – echter BMW, kein Bugatti */
+.ref1 { background: url('https://images.unsplash.com/photo-1555215695-3004980ad54e?w=700&q=80') center/cover; }
+/* VW Golf – kompakter Alltagswagen */
+.ref2 { background: url('https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=700&q=80') center/cover; }
+/* VW Passat – normales Familienfahrzeug */
+.ref3 { background: url('https://images.unsplash.com/photo-1502877338535-766e1452684a?w=700&q=80') center/cover; }
+/* Opel Astra – Kleinwagen / Alltagsauto */
+.ref4 { background: url('https://images.unsplash.com/photo-1549399542-7e3f8b79c341?w=700&q=80') center/cover; }
+/* Porsche 911 – Sonderlackierung Premium */
+.ref5 { background: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=700&q=80') center/cover; }
+/* Ford Focus – normales Alltagsfahrzeug */
+.ref6 { background: url('https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=700&q=80') center/cover; }
+
+/* Kennzeichen-Overlay: Verlauf am unteren Bildrand schwärzt Kennzeichenbereich */
+.ref-img {
+  aspect-ratio: 4/3;
+  position: relative;
+}
+.ref-img::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 38%;
+  background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.82) 100%);
+  pointer-events: none;
+  border-radius: 0;
+}
 
 .ref-info { padding: 1.25rem; background: var(--dark2); }
 .ref-info h3 { font-size: 0.9rem; margin-bottom: 0.4rem; }
@@ -879,6 +900,63 @@ p  { color: var(--gray-light); line-height: 1.7; }
    KONTAKT (page header for h2)
 ═══════════════════════════════════════════ */
 .kontakt-form-wrap h2 { margin-bottom: 1.5rem; }
+
+/* ═══════════════════════════════════════════
+   CONSENT GATE (blocking first-visit overlay)
+═══════════════════════════════════════════ */
+.consent-gate {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.97);
+  z-index: 11000;
+  display: flex; align-items: center; justify-content: center;
+  padding: 1rem;
+  backdrop-filter: blur(6px);
+}
+
+.consent-gate-box {
+  background: var(--dark2);
+  border: 1px solid rgba(201,168,76,0.25);
+  border-radius: var(--radius-lg);
+  max-width: 520px; width: 100%;
+  padding: 2.5rem;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.8);
+}
+
+.consent-gate-logo {
+  display: flex; align-items: center; gap: 0.75rem;
+  margin-bottom: 1.75rem;
+}
+
+.consent-gate-box h2 { font-size: 1.4rem; margin-bottom: 0.75rem; }
+.consent-gate-box > p { font-size: 0.875rem; color: var(--gray-light); margin-bottom: 1.5rem; line-height: 1.6; }
+
+.consent-gate-details {
+  background: var(--dark3); border-radius: var(--radius);
+  padding: 1.1rem 1.25rem; margin-bottom: 1.25rem;
+  display: flex; flex-direction: column; gap: 0.85rem;
+  border: 1px solid var(--border);
+}
+.consent-item { display: flex; flex-direction: column; gap: 0.25rem; }
+.consent-item strong { font-size: 0.85rem; color: var(--white); }
+.consent-item span { font-size: 0.78rem; color: var(--gray); line-height: 1.5; }
+.consent-item-optional strong { color: var(--gray-light); }
+
+.consent-gate-legal {
+  font-size: 0.8rem; color: var(--gray); margin-bottom: 1.75rem; line-height: 1.6;
+}
+
+.consent-gate-actions {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;
+}
+.consent-gate-actions .btn-outline,
+.consent-gate-actions .btn-primary {
+  justify-content: center; text-align: center; width: 100%;
+}
+
+@media (max-width: 480px) {
+  .consent-gate-actions { grid-template-columns: 1fr; }
+  .consent-gate-box { padding: 1.75rem 1.25rem; }
+}
 
 /* ═══════════════════════════════════════════
    RESPONSIVE

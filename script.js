@@ -1,13 +1,59 @@
 /* ═══════════════════════════════════════════
+   CONSENT GATE (blocking first-visit overlay)
+═══════════════════════════════════════════ */
+const consentGate         = document.getElementById('consentGate');
+const consentAcceptBtn    = document.getElementById('consentAccept');
+const consentNecessaryBtn = document.getElementById('consentNecessary');
+
+function dismissConsentGate(type) {
+  localStorage.setItem('cookieConsent', type);
+  localStorage.setItem('cookieConsentDate', new Date().toISOString());
+  consentGate.classList.add('hidden');
+  document.body.style.overflow = '';
+}
+
+if (!localStorage.getItem('cookieConsent')) {
+  consentGate.classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+} else {
+  consentGate.classList.add('hidden');
+}
+
+consentAcceptBtn.addEventListener('click',    () => dismissConsentGate('all'));
+consentNecessaryBtn.addEventListener('click', () => dismissConsentGate('necessary'));
+
+function openPrivacyFromGate() {
+  openPrivacy();
+}
+
+/* ═══════════════════════════════════════════
+   COOKIE BANNER (Footer re-open only)
+═══════════════════════════════════════════ */
+const cookieBanner    = document.getElementById('cookieBanner');
+const cookieAccept    = document.getElementById('cookieAccept');
+const cookieNecessary = document.getElementById('cookieNecessary');
+
+cookieBanner.classList.add('hidden');
+
+cookieAccept.addEventListener('click', () => {
+  localStorage.setItem('cookieConsent', 'all');
+  cookieBanner.classList.add('hidden');
+});
+cookieNecessary.addEventListener('click', () => {
+  localStorage.setItem('cookieConsent', 'necessary');
+  cookieBanner.classList.add('hidden');
+});
+
+/* ═══════════════════════════════════════════
    PAGE NAVIGATION
 ═══════════════════════════════════════════ */
 const pages = {
-  home:         document.getElementById('pageHome'),
-  unternehmen:  document.getElementById('pageUnternehmen'),
-  leistungen:   document.getElementById('pageLeistungen'),
-  referenzen:   document.getElementById('pageReferenzen'),
-  jobs:         document.getElementById('pageJobs'),
-  kontakt:      document.getElementById('pageKontakt'),
+  home:        document.getElementById('pageHome'),
+  unternehmen: document.getElementById('pageUnternehmen'),
+  leistungen:  document.getElementById('pageLeistungen'),
+  referenzen:  document.getElementById('pageReferenzen'),
+  jobs:        document.getElementById('pageJobs'),
+  kontakt:     document.getElementById('pageKontakt'),
 };
 
 function showPage(pageId, tabId) {
@@ -21,10 +67,7 @@ function showPage(pageId, tabId) {
     a.classList.toggle('active', a.dataset.page === pageId);
   });
 
-  if (tabId) {
-    setTimeout(() => activateTab(page, tabId), 100);
-  }
-
+  if (tabId) setTimeout(() => activateTab(page, tabId), 80);
   closeMenu();
 }
 
@@ -32,25 +75,44 @@ function showPage(pageId, tabId) {
    TAB SYSTEM
 ═══════════════════════════════════════════ */
 function activateTab(pageEl, tabId) {
-  const tabBtns = pageEl.querySelectorAll('.tab-btn');
-  const tabContents = pageEl.querySelectorAll('.tab-content');
-
-  tabBtns.forEach(btn => {
+  pageEl.querySelectorAll('.tab-btn').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.tab === tabId);
   });
-  tabContents.forEach(tc => {
+  pageEl.querySelectorAll('.tab-content').forEach(tc => {
     tc.classList.toggle('active', tc.id === 'tab-' + tabId);
   });
-
   const tabNav = pageEl.querySelector('.tab-nav');
   if (tabNav) tabNav.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
 document.querySelectorAll('.tab-btn').forEach(btn => {
   btn.addEventListener('click', () => {
-    const page = btn.closest('.page');
-    activateTab(page, btn.dataset.tab);
+    activateTab(btn.closest('.page'), btn.dataset.tab);
   });
+});
+
+/* ═══════════════════════════════════════════
+   DROPDOWN – JS hover with delay (fixes gap issue)
+═══════════════════════════════════════════ */
+const dropdownTimers = new Map();
+
+document.querySelectorAll('.has-dropdown').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    clearTimeout(dropdownTimers.get(el));
+    document.querySelectorAll('.has-dropdown').forEach(other => {
+      if (other !== el) other.classList.remove('dropdown-open');
+    });
+    el.classList.add('dropdown-open');
+  });
+  el.addEventListener('mouseleave', () => {
+    dropdownTimers.set(el, setTimeout(() => el.classList.remove('dropdown-open'), 160));
+  });
+});
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('.has-dropdown')) {
+    document.querySelectorAll('.has-dropdown').forEach(el => el.classList.remove('dropdown-open'));
+  }
 });
 
 /* ═══════════════════════════════════════════
@@ -74,32 +136,28 @@ function closeMenu() {
 /* ═══════════════════════════════════════════
    STICKY HEADER
 ═══════════════════════════════════════════ */
-const header = document.getElementById('mainHeader');
 window.addEventListener('scroll', () => {
-  header.classList.toggle('scrolled', window.scrollY > 40);
+  document.getElementById('mainHeader').classList.toggle('scrolled', window.scrollY > 40);
 }, { passive: true });
 
 /* ═══════════════════════════════════════════
-   COOKIE BANNER
+   IMPRESSUM MODAL
 ═══════════════════════════════════════════ */
-const cookieBanner    = document.getElementById('cookieBanner');
-const cookieAccept    = document.getElementById('cookieAccept');
-const cookieNecessary = document.getElementById('cookieNecessary');
+const impressumModal = document.getElementById('impressumModal');
 
-function setCookieConsent(type) {
-  localStorage.setItem('cookieConsent', type);
-  localStorage.setItem('cookieConsentDate', new Date().toISOString());
-  cookieBanner.classList.add('hidden');
+function openImpressum() {
+  impressumModal.classList.add('open');
+  document.body.style.overflow = 'hidden';
 }
 
-cookieAccept.addEventListener('click',    () => setCookieConsent('all'));
-cookieNecessary.addEventListener('click', () => setCookieConsent('necessary'));
-
-if (!localStorage.getItem('cookieConsent')) {
-  cookieBanner.classList.remove('hidden');
-} else {
-  cookieBanner.classList.add('hidden');
+function closeImpressum() {
+  impressumModal.classList.remove('open');
+  document.body.style.overflow = '';
 }
+
+impressumModal.addEventListener('click', e => {
+  if (e.target === impressumModal) closeImpressum();
+});
 
 /* ═══════════════════════════════════════════
    PRIVACY MODAL
@@ -121,7 +179,10 @@ privacyModal.addEventListener('click', e => {
 });
 
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closePrivacy();
+  if (e.key === 'Escape') {
+    closePrivacy();
+    closeImpressum();
+  }
 });
 
 /* ═══════════════════════════════════════════
@@ -153,18 +214,16 @@ function submitForm(e) {
 }
 
 /* ═══════════════════════════════════════════
-   COUNTER ANIMATION (stats)
+   COUNTER ANIMATION (stats bar)
 ═══════════════════════════════════════════ */
 function animateCounters() {
   document.querySelectorAll('.stat-num[data-count]').forEach(el => {
-    const target = parseInt(el.dataset.count, 10);
+    const target   = parseInt(el.dataset.count, 10);
     const duration = 1800;
-    const start = performance.now();
-
+    const start    = performance.now();
     function update(now) {
-      const elapsed = now - start;
-      const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
+      const progress = Math.min((now - start) / duration, 1);
+      const eased    = 1 - Math.pow(1 - progress, 3);
       el.textContent = Math.round(eased * target).toLocaleString('de-DE');
       if (progress < 1) requestAnimationFrame(update);
     }
@@ -172,19 +231,16 @@ function animateCounters() {
   });
 }
 
-const statsBar = document.querySelector('.stats-bar');
 let countersStarted = false;
-
-const statsObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting && !countersStarted) {
+const statsBar = document.querySelector('.stats-bar');
+if (statsBar) {
+  new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting && !countersStarted) {
       countersStarted = true;
       animateCounters();
     }
-  });
-}, { threshold: 0.3 });
-
-if (statsBar) statsObserver.observe(statsBar);
+  }, { threshold: 0.3 }).observe(statsBar);
+}
 
 /* ═══════════════════════════════════════════
    REFERENZEN FILTER
@@ -193,20 +249,15 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-
     const filter = btn.dataset.filter;
     document.querySelectorAll('.ref-card').forEach(card => {
-      if (filter === 'all' || card.dataset.cat === filter) {
-        card.classList.remove('filtered-out');
-      } else {
-        card.classList.add('filtered-out');
-      }
+      card.classList.toggle('filtered-out', filter !== 'all' && card.dataset.cat !== filter);
     });
   });
 });
 
 /* ═══════════════════════════════════════════
-   SCROLL ANIMATIONS
+   SCROLL ANIMATIONS (fade-in cards)
 ═══════════════════════════════════════════ */
 const animEls = document.querySelectorAll(
   '.service-card, .value-card, .team-card, .cert-card, .ref-card, .job-card, .testimonial, .benefit'
@@ -220,12 +271,12 @@ const animObserver = new IntersectionObserver(entries => {
       animObserver.unobserve(entry.target);
     }
   });
-}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
 
 animEls.forEach((el, i) => {
   el.style.opacity = '0';
-  el.style.transform = 'translateY(24px)';
-  el.style.transition = `opacity 0.5s ease ${(i % 4) * 0.08}s, transform 0.5s ease ${(i % 4) * 0.08}s`;
+  el.style.transform = 'translateY(22px)';
+  el.style.transition = `opacity 0.5s ease ${(i % 4) * 0.07}s, transform 0.5s ease ${(i % 4) * 0.07}s`;
   animObserver.observe(el);
 });
 

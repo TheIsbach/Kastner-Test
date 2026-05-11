@@ -324,7 +324,7 @@ p  { color: var(--gray-light); line-height: 1.7; }
   position: absolute; inset: 0;
   background:
     linear-gradient(135deg, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.6) 50%, rgba(10,10,10,0.85) 100%),
-    url('https://images.unsplash.com/photo-pq8fh5SK890?w=1800&q=80') center/cover no-repeat;
+    url('https://images.unsplash.com/photo-1635707109073-922d81b61ae2?w=1800&q=80') center/cover no-repeat;
 }
 
 .hero-overlay {
@@ -501,7 +501,7 @@ p  { color: var(--gray-light); line-height: 1.7; }
 .page-hero {
   background:
     linear-gradient(135deg, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.75) 100%),
-    url('https://images.unsplash.com/photo-pq8fh5SK890?w=1600&q=80') center/cover;
+    url('https://images.unsplash.com/photo-1635707109073-922d81b61ae2?w=1600&q=80') center/cover;
   padding: 9rem 2rem 5rem;
   text-align: center;
   border-bottom: 1px solid var(--border);
@@ -657,20 +657,20 @@ p  { color: var(--gray-light); line-height: 1.7; }
   pointer-events: none;
 }
 .smart-repair-img {
-  /* Karosserie-Spotschweißung / Dellenreparatur – Unsplash r3zJqdmByvI, free */
-  background: url('https://images.unsplash.com/photo-r3zJqdmByvI?w=900&q=80') center/cover;
+  /* Karosserie-Dellenreparatur – verifizierte CDN-URL */
+  background: url('https://images.unsplash.com/photo-1769021955466-ed4372792114?w=900&q=80') center/cover;
 }
 .unfall-img {
-  /* Beschädigter Kotflügel / Unfallschaden – Unsplash F_EZo6Rr_bE, free */
-  background: url('https://images.unsplash.com/photo-F_EZo6Rr_bE?w=900&q=80') center/cover;
+  /* Unfallschaden Kotflügel – verifizierte CDN-URL */
+  background: url('https://images.unsplash.com/photo-1762049297259-f9fdd460ec99?w=900&q=80') center/cover;
 }
 .fahrzeug-img {
-  /* Porsche GT3 RS in Lackierkabine – Unsplash 2ssdrtw07dw, free */
-  background: url('https://images.unsplash.com/photo-2ssdrtw07dw?w=900&q=80') center/cover;
+  /* Porsche in Lackierkabine – verifizierte CDN-URL */
+  background: url('https://images.unsplash.com/photo-1632605185825-fd583793fa73?w=900&q=80') center/cover;
 }
 .sonder-img {
-  /* Custom Flame-Lackierung VW – Unsplash ARV1Dy1uYJU, free */
-  background: url('https://images.unsplash.com/photo-ARV1Dy1uYJU?w=900&q=80') center/cover;
+  /* Custom Lackierung – verifizierte CDN-URL */
+  background: url('https://images.unsplash.com/photo-1775500820071-ed5699fb0d40?w=900&q=80') center/cover;
 }
 
 .feature-list { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 1.75rem; }

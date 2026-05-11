@@ -324,7 +324,7 @@ p  { color: var(--gray-light); line-height: 1.7; }
   position: absolute; inset: 0;
   background:
     linear-gradient(135deg, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.6) 50%, rgba(10,10,10,0.85) 100%),
-    url('https://images.unsplash.com/photo-pOJT5GPxv4g?w=1800&q=80') center/cover no-repeat;
+    url('https://images.unsplash.com/photo-u1r8v9OokDo?w=1800&q=80') center/cover no-repeat;
 }
 
 .hero-overlay {
@@ -501,7 +501,7 @@ p  { color: var(--gray-light); line-height: 1.7; }
 .page-hero {
   background:
     linear-gradient(135deg, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.75) 100%),
-    url('https://images.unsplash.com/photo-pOJT5GPxv4g?w=1600&q=80') center/cover;
+    url('https://images.unsplash.com/photo-u1r8v9OokDo?w=1600&q=80') center/cover;
   padding: 9rem 2rem 5rem;
   text-align: center;
   border-bottom: 1px solid var(--border);
@@ -657,16 +657,16 @@ p  { color: var(--gray-light); line-height: 1.7; }
   pointer-events: none;
 }
 .smart-repair-img {
-  background: url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=900&q=80') center/cover;
+  background: url('https://images.unsplash.com/photo-oXdqrraUKaE?w=900&q=80') center/cover;
 }
 .unfall-img {
-  background: url('https://images.unsplash.com/photo-ETviKVYbhzE?w=900&q=80') center/cover;
+  background: url('https://images.unsplash.com/photo-p76hPO989to?w=900&q=80') center/cover;
 }
 .fahrzeug-img {
-  background: url('https://images.unsplash.com/photo-20mIhrvgLYo?w=900&q=80') center/cover;
+  background: url('https://images.unsplash.com/photo-rzrVW7Cz4-g?w=900&q=80') center/cover;
 }
 .sonder-img {
-  background: url('https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?w=900&q=80') center/cover;
+  background: url('https://images.unsplash.com/photo-1_lxISUE3F4?w=900&q=80') center/cover;
 }
 
 .feature-list { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 1.75rem; }
@@ -721,6 +721,7 @@ p  { color: var(--gray-light); line-height: 1.7; }
 .filter-btn.active { background: var(--gold); color: var(--black); border-color: var(--gold); font-weight: 700; }
 
 .ref-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
+.ref-grid-3 { max-width: 960px; margin: 0 auto; }
 .ref-card {
   border-radius: var(--radius-lg); overflow: hidden;
   border: 1px solid var(--border);
@@ -729,18 +730,10 @@ p  { color: var(--gray-light); line-height: 1.7; }
 .ref-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.5); border-color: rgba(201,168,76,0.3); }
 .ref-card.filtered-out { display: none; }
 
-/* BMW 3er – verifiziert korrekt */
-.ref1 { background: url('https://images.unsplash.com/photo-1555215695-3004980ad54e?w=700&q=80') center/cover; }
-/* VW Golf – Showroom */
-.ref2 { background: url('https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=700&q=80') center/cover; }
-/* VW Passat – Showroom Wolfsburg, verifiziert */
-.ref3 { background: url('https://images.unsplash.com/photo-L9Mcwc6hmW8?w=700&q=80') center/cover; }
-/* Opel Astra – Silber Hatchback, verifiziert */
-.ref4 { background: url('https://images.unsplash.com/photo-FtouUEirmYk?w=700&q=80') center/cover; }
-/* Porsche 911 – Sonderlackierung Premium */
-.ref5 { background: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=700&q=80') center/cover; }
-/* Ford Focus – Rot, verifiziert */
-.ref6 { background: url('https://images.unsplash.com/photo-yFxW81riAtA?w=700&q=80') center/cover; }
+/* Eigene Kundenfotos – lokal */
+.ref1 { background: url('images/ref-bmw-m5.jpg') center/cover; }
+.ref2 { background: url('images/ref-garage-fleet.jpg') center 40%/cover; }
+.ref3 { background: url('images/ref-polishing.jpg') center/cover; }
 
 /* Showroom-Effekt: Spotlight von oben + Kennzeichen schwärzen */
 .ref-img {

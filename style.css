@@ -324,7 +324,7 @@ p  { color: var(--gray-light); line-height: 1.7; }
   position: absolute; inset: 0;
   background:
     linear-gradient(135deg, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.6) 50%, rgba(10,10,10,0.85) 100%),
-    url('https://images.unsplash.com/photo-u1r8v9OokDo?w=1800&q=80') center/cover no-repeat;
+    url('https://images.unsplash.com/photo-pq8fh5SK890?w=1800&q=80') center/cover no-repeat;
 }
 
 .hero-overlay {
@@ -501,7 +501,7 @@ p  { color: var(--gray-light); line-height: 1.7; }
 .page-hero {
   background:
     linear-gradient(135deg, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.75) 100%),
-    url('https://images.unsplash.com/photo-u1r8v9OokDo?w=1600&q=80') center/cover;
+    url('https://images.unsplash.com/photo-pq8fh5SK890?w=1600&q=80') center/cover;
   padding: 9rem 2rem 5rem;
   text-align: center;
   border-bottom: 1px solid var(--border);
@@ -657,16 +657,20 @@ p  { color: var(--gray-light); line-height: 1.7; }
   pointer-events: none;
 }
 .smart-repair-img {
-  background: url('https://images.unsplash.com/photo-oXdqrraUKaE?w=900&q=80') center/cover;
+  /* Karosserie-Spotschweißung / Dellenreparatur – Unsplash r3zJqdmByvI, free */
+  background: url('https://images.unsplash.com/photo-r3zJqdmByvI?w=900&q=80') center/cover;
 }
 .unfall-img {
-  background: url('https://images.unsplash.com/photo-p76hPO989to?w=900&q=80') center/cover;
+  /* Beschädigter Kotflügel / Unfallschaden – Unsplash F_EZo6Rr_bE, free */
+  background: url('https://images.unsplash.com/photo-F_EZo6Rr_bE?w=900&q=80') center/cover;
 }
 .fahrzeug-img {
-  background: url('https://images.unsplash.com/photo-rzrVW7Cz4-g?w=900&q=80') center/cover;
+  /* Porsche GT3 RS in Lackierkabine – Unsplash 2ssdrtw07dw, free */
+  background: url('https://images.unsplash.com/photo-2ssdrtw07dw?w=900&q=80') center/cover;
 }
 .sonder-img {
-  background: url('https://images.unsplash.com/photo-1_lxISUE3F4?w=900&q=80') center/cover;
+  /* Custom Flame-Lackierung VW – Unsplash ARV1Dy1uYJU, free */
+  background: url('https://images.unsplash.com/photo-ARV1Dy1uYJU?w=900&q=80') center/cover;
 }
 
 .feature-list { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 1.75rem; }

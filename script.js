@@ -1,12 +1,16 @@
 /* ═══════════════════════════════════════════
-   CONSENT GATE – Datenschutz + Cookie Banner
-   Erscheint bei jedem Erstbesuch (localStorage
-   leer). Zum Testen: DevTools → Application →
-   Local Storage → "cookieConsent" löschen.
+   CONSENT GATE – Cookie + Datenschutz Banner
+   Erscheint beim Erstbesuch und nach Widerruf.
+   Einwilligung wird in localStorage gespeichert.
 ═══════════════════════════════════════════ */
 const consentGate         = document.getElementById('consentGate');
 const consentAcceptBtn    = document.getElementById('consentAccept');
 const consentNecessaryBtn = document.getElementById('consentNecessary');
+
+function showConsentGate() {
+  consentGate.classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+}
 
 function dismissConsentGate(type) {
   localStorage.setItem('cookieConsent', type);
@@ -15,10 +19,16 @@ function dismissConsentGate(type) {
   document.body.style.overflow = '';
 }
 
-/* Banner beim Erstbesuch anzeigen */
+/* Einwilligung widerrufen und Gate erneut zeigen (Footer-Link) */
+function reopenConsentGate() {
+  localStorage.removeItem('cookieConsent');
+  localStorage.removeItem('cookieConsentDate');
+  showConsentGate();
+}
+
+/* Beim Laden: zeigen falls noch keine Einwilligung */
 if (!localStorage.getItem('cookieConsent')) {
-  consentGate.classList.remove('hidden');
-  document.body.style.overflow = 'hidden';
+  showConsentGate();
 } else {
   consentGate.classList.add('hidden');
 }
@@ -26,13 +36,11 @@ if (!localStorage.getItem('cookieConsent')) {
 consentAcceptBtn.addEventListener('click',    () => dismissConsentGate('all'));
 consentNecessaryBtn.addEventListener('click', () => dismissConsentGate('necessary'));
 
-/* Datenschutz aus dem Consent-Gate heraus öffnen */
-function openPrivacyFromGate() {
-  openPrivacy();
-}
+/* Datenschutz aus dem Consent-Gate öffnen */
+function openPrivacyFromGate() { openPrivacy(); }
 
 /* ═══════════════════════════════════════════
-   COOKIE BANNER (Footer re-open only)
+   COOKIE BANNER (Footer-Widerruf)
 ═══════════════════════════════════════════ */
 const cookieBanner    = document.getElementById('cookieBanner');
 const cookieAccept    = document.getElementById('cookieAccept');

@@ -322,7 +322,9 @@ p  { color: var(--gray-light); line-height: 1.7; }
 
 .hero-bg {
   position: absolute; inset: 0;
-  background: radial-gradient(ellipse 150% 100% at 65% 45%, #1e1a0f 0%, #0f0d09 40%, #0a0a0a 75%);
+  background:
+    linear-gradient(135deg, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.6) 50%, rgba(10,10,10,0.85) 100%),
+    url('images/hero.jpg') center/cover no-repeat;
 }
 
 .hero-overlay {
@@ -457,7 +459,9 @@ p  { color: var(--gray-light); line-height: 1.7; }
 .why-image { aspect-ratio: 4/5; }
 .why-image-inner {
   width: 100%; height: 100%; border-radius: var(--radius-lg);
-  background: linear-gradient(145deg, #1e1a14 0%, #161210 35%, #0f0d0b 60%, #141210 100%);
+  background:
+    linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.6)),
+    url('images/why-us.jpg') center/cover;
   position: relative;
 }
 .why-badge {
@@ -495,7 +499,9 @@ p  { color: var(--gray-light); line-height: 1.7; }
    PAGE HERO (inner pages)
 ═══════════════════════════════════════════ */
 .page-hero {
-  background: linear-gradient(135deg, #1a1710 0%, #0f0d09 45%, #0d0c08 100%);
+  background:
+    linear-gradient(135deg, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.75) 100%),
+    url('images/hero.jpg') center/cover;
   padding: 9rem 2rem 5rem;
   text-align: center;
   border-bottom: 1px solid var(--border);
@@ -544,7 +550,9 @@ p  { color: var(--gray-light); line-height: 1.7; }
 
 .about-img {
   aspect-ratio: 4/3; border-radius: var(--radius-lg);
-  background: linear-gradient(145deg, #1a1814 0%, #14120e 40%, #0f0e0a 70%, #131109 100%);
+  background:
+    linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4)),
+    url('images/about.jpg') center/cover;
 }
 
 /* ═══════════════════════════════════════════
@@ -649,16 +657,16 @@ p  { color: var(--gray-light); line-height: 1.7; }
   pointer-events: none;
 }
 .smart-repair-img {
-  background: linear-gradient(145deg, #131820 0%, #0c1018 45%, #090c12 100%);
+  background: url('images/smart-repair.jpg') center/cover;
 }
 .unfall-img {
-  background: linear-gradient(145deg, #1a1214 0%, #13090c 45%, #0a0708 100%);
+  background: url('images/unfall.jpg') center/cover;
 }
 .fahrzeug-img {
-  background: linear-gradient(145deg, #181a12 0%, #101209 45%, #0a0c07 100%);
+  background: url('images/fahrzeug.jpg') center/cover;
 }
 .sonder-img {
-  background: linear-gradient(145deg, #16121e 0%, #100c16 45%, #0a090e 100%);
+  background: url('images/sonder.jpg') center/cover;
 }
 
 .feature-list { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 1.75rem; }

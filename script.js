@@ -277,6 +277,39 @@ animEls.forEach((el, i) => {
 });
 
 /* ═══════════════════════════════════════════
+   PAGE NAVIGATION VIA DATA ATTRIBUTES
+═══════════════════════════════════════════ */
+document.addEventListener('click', e => {
+  const el = e.target.closest('[data-page]');
+  if (!el) return;
+  e.preventDefault();
+  showPage(el.dataset.page, el.dataset.tab);
+});
+
+/* ═══════════════════════════════════════════
+   BANNER & MODAL EVENT LISTENERS
+═══════════════════════════════════════════ */
+document.getElementById('privacyBannerOpenPrivacy').addEventListener('click', openPrivacy);
+document.querySelector('.privacy-banner-btn').addEventListener('click', dismissPrivacyBanner);
+document.getElementById('cookieBannerPrivacyLink').addEventListener('click', openPrivacy);
+
+document.querySelector('#impressumModal .modal-close').addEventListener('click', closeImpressum);
+document.getElementById('impressumCloseBtn').addEventListener('click', closeImpressum);
+
+document.querySelector('#privacyModal .modal-close').addEventListener('click', closePrivacy);
+document.getElementById('privacyCloseBtn').addEventListener('click', closePrivacy);
+
+document.getElementById('privacyConsentReadLink').addEventListener('click', openPrivacy);
+document.getElementById('acceptPrivacyBtn').addEventListener('click', acceptPrivacy);
+document.getElementById('formPrivacyReadLink').addEventListener('click', openPrivacy);
+
+document.getElementById('contactForm').addEventListener('submit', submitForm);
+
+document.getElementById('footerPrivacyLink').addEventListener('click', e => { e.preventDefault(); openPrivacy(); });
+document.getElementById('footerImpressumLink').addEventListener('click', e => { e.preventDefault(); openImpressum(); });
+document.getElementById('footerCookieSettingsLink').addEventListener('click', e => { e.preventDefault(); reopenConsentGate(); });
+
+/* ═══════════════════════════════════════════
    INIT
 ═══════════════════════════════════════════ */
 showPage('home');
